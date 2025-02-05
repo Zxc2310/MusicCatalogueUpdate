@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MusicCatalogueFrame {
-    JFrame BorderFrame; // Declare the JFrame variable
+    JFrame BorderFrame; 
     public JTextField artistField;
     public JTextField studioField;
     public JComboBox<String> categoryComboBox;
@@ -37,7 +37,6 @@ public class MusicCatalogueFrame {
         BorderFrame.add(this.WestPart(), BorderLayout.WEST);
         BorderFrame.add(this.CenterPart(), BorderLayout.CENTER);
 
-        // Action listener for the submit button
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,7 +54,6 @@ public class MusicCatalogueFrame {
             }
         });
 
-        // Action listener for the view catalogue button
         viewCatalogueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,7 +62,6 @@ public class MusicCatalogueFrame {
             }
         });
 
-        // Action listener for the exit button
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,7 +105,7 @@ public class MusicCatalogueFrame {
         categoryPanel.add(reggaeButton);
         categoryPanel.add(balladsButton);
 
-        return categoryPanel; // Return the categoryPanel
+        return categoryPanel; 
     }
 
     public JPanel CenterPart() {
