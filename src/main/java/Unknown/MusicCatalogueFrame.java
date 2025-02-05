@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MusicCatalogueFrame {
-    JFrame BorderFrame; // Declare the JFrame variable
+    JFrame BorderFrame;
     public JTextField artistField;
     public JTextField studioField;
     public JComboBox<String> categoryComboBox;
@@ -37,7 +37,6 @@ public class MusicCatalogueFrame {
         BorderFrame.add(this.WestPart(), BorderLayout.WEST);
         BorderFrame.add(this.CenterPart(), BorderLayout.CENTER);
 
-        // Action listener for the submit button
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,16 +54,14 @@ public class MusicCatalogueFrame {
             }
         });
 
-        // Action listener for the view catalogue button
         viewCatalogueButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ViewCatalogueDialog dialog = new ViewCatalogueDialog(catalogue);
-                dialog.showDialog(); // Call the new method to show the dialog
+                dialog.showDialog();
             }
         });
 
-        // Action listener for the exit button
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,27 +105,34 @@ public class MusicCatalogueFrame {
         categoryPanel.add(reggaeButton);
         categoryPanel.add(balladsButton);
 
-        return categoryPanel; // Return the categoryPanel
+        return categoryPanel;
     }
 
     public JPanel CenterPart() {
-        JPanel inputPanel = new JPanel(new GridLayout(5, 2));
-        inputPanel.add(new JLabel("Artist Name:"));
-        artistField = new JTextField();
-        inputPanel.add(artistField);
+        JPanel inputPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        inputPanel.add(new JLabel("Recording Studio:"));
-        studioField = new JTextField();
-        inputPanel.add(studioField);
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        inputPanel.add(new JLabel("Category:"));
-        categoryComboBox = new JComboBox<>(new String[]{"Rap", "Reggae", "Ballads"});
-        inputPanel.add(categoryComboBox);
+        String[] labels = {"Artist Name:", "Recording Studio:", "Category:", "Available:"};
+        Component[] fields = {
+                artistField = new JTextField(15),
+                studioField = new JTextField(15),
+                categoryComboBox = new JComboBox<>(new String[]{"Rap", "Reggae", "Ballads"}),
+                availableCheckBox = new JCheckBox()
+        };
 
-        inputPanel.add(new JLabel("Available:"));
-        availableCheckBox = new JCheckBox();
-        inputPanel.add(availableCheckBox);
+        for (int i = 0; i < labels.length; i++) {
+            gbc.gridx = 0; gbc.gridy = i;
+            inputPanel.add(new JLabel(labels[i]), gbc);
+            gbc.gridx = 1;
+            inputPanel.add(fields[i], gbc);
+        }
 
         return inputPanel;
     }
+
+
 }
